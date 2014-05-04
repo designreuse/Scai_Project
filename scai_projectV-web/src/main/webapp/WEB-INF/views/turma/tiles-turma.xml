@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+              "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="turma-novo" extends="base.definition">
+		<put-attribute name="title" value="SCAI - Teste"/>
+		<put-attribute name="body" value="/WEB-INF/views/turma/novo.jsp"></put-attribute>		
+	</definition>
+	
+	<definition name="turma-gerenciar" extends="base.definition">
+		<put-attribute name="title" value="SCAI - Teste"/>
+		<put-attribute name="body" value="/WEB-INF/views/turma/gerenciar.jsp"></put-attribute>		
+	</definition>
+	
+	<definition name="turma-editar" extends="base.definition">
+		<put-attribute name="title" value="SCAI - Teste"/>
+		<put-attribute name="body" value="/WEB-INF/views/turma/editar.jsp"></put-attribute>		
+	</definition>
+</tiles-definitions>
+
+
