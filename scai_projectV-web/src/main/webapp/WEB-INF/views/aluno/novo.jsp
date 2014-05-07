@@ -1,4 +1,5 @@
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
@@ -153,48 +154,42 @@
 									class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th class="col-md-6">Turma</th>
-											<th class="col-md-4">Curso</th>
-											<th>Opção</th>
+											<th width="8%">Matéria</th>
+											<th width="25%">Turma</th>
+											<th width="25%">Horário</th>
+											<th width="10%">Inicío</th>
+											<th width="13%">Vagas</th>
+											<th width="9%">Valor</th>
+											<th width="10%">Opção</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${turmas}" var="turma">
 											<tr>
-												<td>${turma.nomeTurma}</td>
 												<td>${turma.materia.nome}</td>
+												<td>${turma.nomeTurma}</td>
+												<td><c:forEach items="${turma.horariosAulas}"
+														var="horario">
+														<p>${horario.diaSemana} das ${horario.horarioInicio}
+															até ${horario.horarioTermino}</p>
+													</c:forEach></td>
+												<td>${turma.previsaoInicio}</td>
 												<td>
-													<div class="btn-group">
-														<div class="btn-group">
-															<button type="button"
-																class="btn btn-default dropdown-toggle"
-																data-toggle="dropdown">
-																Opções <span class="caret"></span>
-															</button>
-															<ul class="dropdown-menu">
-																<li><a href="#" class="glyphicon glyphicon-pencil">
-																		Editar</a></li>
-																<li><a href="#myModal"
-																	class="glyphicon glyphicon-ban-circle"
-																	data-toggle="modal" data-target="#myModal">
-																		Desativar</a></li>
-																<li role="presentation" class="divider"></li>
-																<li><a href="#" class="glyphicon glyphicon-trash">
-																		Remover</a></li>
-															</ul>
+													<div class="progress progress-striped active">
+														<div class="progress-bar" role="progressbar"
+															aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+															style="width: ${turma.vagasDisponiveis}%" value="tte">
+															<span class="sr-only"></span>${turma.alunosMatriculados}/${turma.vagasDisponiveis}
 														</div>
-													</div>
+													</div> 
+												</td>
+												<td>R$ ${turma.valorCurso }</td>
+												<td>
+													<button class="btn btn-success btn-flat">Matricular</button>
 												</td>
 											</tr>
 										</c:forEach>
 									</tbody>
-									<tfoot>
-										<tr>
-											<th>Rendering engine</th>
-											<th>Browser</th>
-											<th>Platform(s)</th>
-										</tr>
-									</tfoot>
 								</table>
 
 

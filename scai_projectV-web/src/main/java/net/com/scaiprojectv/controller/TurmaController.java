@@ -39,7 +39,7 @@ public class TurmaController{
 	@RequestMapping(value = "/cadastrar-turma", method = RequestMethod.POST, produces = "application/json")
 	@ResponseStatus(value = HttpStatus.OK)
 	public @ResponseBody void cadastrarTurma(@RequestBody Turma turma){
-		System.out.println("Turma: " + turma.getHorariosAulas().get(0).getDiaSemana());
+		turma.setAlunosMatriculados(0);
 		turmaService.cadastrar(turma);
 	}
 	
