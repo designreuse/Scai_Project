@@ -75,7 +75,7 @@ public class ApplicationContext {
 	
 	@Bean
 	public JpaTransactionManager transactionManager() {
-		logger.info("Inicializando transactionManager...");
+		logger.info("Inicializando transactionManager alterado...");
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
 		logger.info("transactionManager inicializado com sucesso!");
