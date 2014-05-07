@@ -1,7 +1,6 @@
 package net.com.scaiprojectv.controller;
 
-import java.util.Map;
-
+import javassist.NotFoundException;
 import net.com.scaiprojectv.enumerator.TipoFuncionario;
 import net.com.scaiprojectv.model.Funcionario;
 import net.com.scaiprojectv.service.FuncionarioService;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class FuncionarioController {
@@ -21,6 +21,7 @@ public class FuncionarioController {
 	private static final String RETURN_NOVO_AUXILIAR = "novo-auxiliar";
 	private static final String RETURN_GERENCIAR_AUXILIAR = "gerenciar-auxiliar";
 	private static final String RETURN_NOVO_DOCENTE = "novo-docente";
+	private static final String REDIRECT_NOVO_AUXILIAR = "redirect:/funcionario-novo-auxiliar";
 
 	@Autowired
 	private FuncionarioService funcionarioService;
@@ -42,11 +43,21 @@ public class FuncionarioController {
 	@RequestMapping(value = "/funcionario-cradastrar-auxiliar", method = RequestMethod.POST)
 	public ModelAndView cadastrarAuxiliar(
 			@ModelAttribute("docente") Funcionario funcionario,
-			BindingResult binding) {
+			BindingResult binding, RedirectAttributes redirect) {
 		ModelAndView view = new ModelAndView(RETURN_NOVO_AUXILIAR);
 
 		funcionario.setTpFuncionario(TipoFuncionario.INTERNO);
-		funcionarioService.salvar(funcionario);
+		
+		try{
+			funcionarioService.salvar(funcionario);
+		}catch(Exception e){
+			view = new ModelAndView(REDIRECT_NOVO_AUXILIAR);
+			redirect.addFlashAttribute("funcionario", funcionario);
+			redirect.addFlashAttribute("msgType", "danger");
+			redirect.addFlashAttribute("msg", e.getMessage());
+			return view;
+		}
+		
 		view.addObject("docente", new Funcionario());
 
 		return view;
@@ -75,7 +86,7 @@ public class FuncionarioController {
 	@RequestMapping(value = "/funcionario-cradastrar-docente", method = RequestMethod.POST)
 	public ModelAndView cadastrarDocente(
 			@ModelAttribute("docente") Funcionario funcionario,
-			BindingResult binding) {
+			BindingResult binding) throws Exception {
 		ModelAndView view = new ModelAndView(RETURN_NOVO_AUXILIAR);
 
 		funcionario.setTpFuncionario(TipoFuncionario.DOCENTE);

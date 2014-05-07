@@ -21,6 +21,27 @@
 				<div class="row">
 					<div class="col-md-12">
 
+						<c:if test="${msgType.equals('success')}">
+							<div class="alert alert-success">
+								<a href="#" class="alert-link">${msg}</a>
+							</div>
+						</c:if>
+						<c:if test="${msg.equals('alert')}">
+							<div class="alert alert-info">
+								<a href="#" class="alert-link">${msg}</a>
+							</div>
+						</c:if>
+						<c:if test="${msg.equals('warning')}">
+							<div class="alert alert-warning">
+								<a href="#" class="alert-link">${msg}</a>
+							</div>
+						</c:if>
+						<c:if test="${msgType == ('danger')}">
+							<div class="alert alert-danger">
+								<a href="#" class="alert-link">${msg}</a>
+							</div>
+						</c:if>
+
 						<form:form action="funcionario-cradastrar-auxiliar" method="POST"
 							modelAttribute="docente" class="form-horizontal" id="form-main">
 							<div class="step1">
@@ -152,7 +173,8 @@
 								<div class="form-group">
 									<form:label path="acessoSistema" class="col-sm-2">Acesso:</form:label>
 									<div class="col-xs-9">
-										<form:select path="acessoSistema" class="form-control" id="acesso_sistema">
+										<form:select path="acessoSistema" class="form-control"
+											id="acesso_sistema">
 											<form:option value="ADMINISTRADOR">Total</form:option>
 											<form:option value="FUNCIONARIO">Parcial</form:option>
 											<form:option value="SEM_ACESSO">Sem acesso</form:option>

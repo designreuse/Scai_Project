@@ -18,7 +18,6 @@ public interface TurmaService {
 	
 	void excluir (Long id);
 	
-	@Transactional(readOnly=true)
 	Turma buscarRegistro(Long id);
 	
 	Turma buscarRegistro(Predicate condicao);

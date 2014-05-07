@@ -61,6 +61,7 @@
 													<th>Início</th>
 													<th>Término</th>
 													<th>Vaga(s)</th>
+													<th>Valor R$</th>
 													<th width="10%">Opções</th>
 												</tr>
 											</thead>
@@ -71,6 +72,8 @@
 														<td>${turma.nomeTurma}</td>
 														<td>${turma.previsaoInicio}</td>
 														<td>${turma.previsaoTermino}</td>
+														<td>${turma.valorCurso}</td>
+														<td><button class="btn btn-primary btn-flat">Matricular</button></td>
 														<td><div class="progress progress-striped active">
 																<div class="progress-bar progress-bar-warning" role="progressbar"
 																	aria-valuenow="45" aria-valuemin="0"

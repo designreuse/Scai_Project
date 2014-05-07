@@ -8,13 +8,14 @@ import com.mysema.query.types.expr.NumberExpression;
 
 public class FuncionarioPredicate {
 
-	public static Predicate buscarDocentes(){
+	public static Predicate buscarDocentes() {
 		QFuncionario predicate = QFuncionario.funcionario;
 		return predicate.cargo.eq("Docente");
 	}
-	
-	public static NumberExpression<Long> verificarUsuario(Funcionario funcionaro){
+
+	public static Predicate verificarUsuario(Funcionario funcionaro) {
 		QFuncionario predicate = QFuncionario.funcionario;
-		return predicate.login.equalsIgnoreCase(funcionaro.getNome()).count();
+		return predicate.login.equalsIgnoreCase(funcionaro.getNome()).or(predicate.cpf.equalsIgnoreCase(funcionaro.getCpf()));
 	}
+	
 }

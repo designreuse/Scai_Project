@@ -79,7 +79,7 @@ public class FuncionarioRepositoryTest {
 	}
 	
 	@Test
-	public void deveTestarCadastrarUmFuncionario(){
+	public void deveTestarCadastrarUmFuncionario() throws Exception{
 		List<Materia> materiaRetorno = materiaService.buscarTodos();
 		Assert.assertNotNull(funcionarioService.salvar(funcionario));
 	}
