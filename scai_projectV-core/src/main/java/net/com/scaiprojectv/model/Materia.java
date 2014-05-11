@@ -22,7 +22,6 @@ import javax.persistence.OneToMany;
 
 import net.com.scaiprojectv.enumerator.TipoAlunoEnum;
 
-
 /**
  * Comment(s):
  * 
@@ -44,37 +43,21 @@ public class Materia {
 	private String nome;
 
 	private Boolean status;
-	
-	@ManyToMany(mappedBy = "materia", fetch = FetchType.EAGER)
+
+	@ManyToMany(mappedBy = "materia")
 	private List<Funcionario> docentes = new ArrayList<Funcionario>();
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
 	public Long getId() {
 		return id;
 	}
-	
-	
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
-	}
-
-
-	public void setFuncionarios(List<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
-	}
-
 
 	public Boolean getStatus() {
 		return status;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public Boolean getTpAluno() {
 		return status;

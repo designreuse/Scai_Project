@@ -3,10 +3,9 @@
  */
 package net.com.scaiprojectv.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,8 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * Comment(s):
@@ -35,41 +34,26 @@ public class Matricula {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(nullable = true)
 	private Integer numeroMatricula;
 
-	@Column(nullable = true)
+	@ManyToOne
+	@JoinColumn(name = "id_aluno")
+	private Aluno aluno;
+
 	private Date dataMatricula;
 
-	@ManyToOne
-	@JoinColumn(name = "matricula")
-	private Funcionario funcionario;
-	
-	/**
-	 *A entity Pessoa está sendo marcada como dona do relacionamento pela anota-
-	 *ção JoinTable, e aponta o nome da tabela de relacionamento. 
-	 */
-	@ManyToMany(fetch = FetchType.LAZY)
-	private List<Turma> turmas = new ArrayList<Turma>();
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@JoinColumn(name = "turma_id")
+	private Turma turma;
 
-	public List<Turma> getTurmas() {
-		return turmas;
-	}
-
-	public void setTurmas(List<Turma> turmas) {
-		this.turmas = turmas;
-	}
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
+	private String teste;
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getNumeroMatricula() {
@@ -80,6 +64,14 @@ public class Matricula {
 		this.numeroMatricula = numeroMatricula;
 	}
 
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
 	public Date getDataMatricula() {
 		return dataMatricula;
 	}
@@ -87,5 +79,23 @@ public class Matricula {
 	public void setDataMatricula(Date dataMatricula) {
 		this.dataMatricula = dataMatricula;
 	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	public String getTeste() {
+		return teste;
+	}
+
+	public void setTeste(String teste) {
+		this.teste = teste;
+	}
+
+	
 
 }

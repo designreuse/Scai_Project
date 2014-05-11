@@ -41,7 +41,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "net.com.scaiprojectv.controller" })
+@ComponentScan(basePackages = { "net.com.scaiprojectv.controller"})
 @EnableJpaRepositories(value = { "net.com.scaiprojectv.repository.impl" })
 @Import(value = net.com.scaiprojectv.config.ApplicationContext.class)
 public class ApplicationContext extends WebMvcConfigurerAdapter {

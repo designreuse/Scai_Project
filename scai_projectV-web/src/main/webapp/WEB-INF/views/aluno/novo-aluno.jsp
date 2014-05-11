@@ -1,5 +1,4 @@
 <!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd" >
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
@@ -8,19 +7,12 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page isELIgnored="false"%>
 
-<script src="js/aluno/form.js" type="text/javascript"></script>
-<!-- DATA TABES SCRIPT -->
-<script src="js/plugins/datatables/jquery.dataTables.js"
-	type="text/javascript"></script>
-<script src="js/plugins/datatables/dataTables.bootstrap.js"
-	type="text/javascript"></script>
-<!-- AdminLTE App -->
-<script src="js/AdminLTE/app.js" type="text/javascript"></script>
+<script src="js/funcionario/form.js" type="text/javascript"></script>
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side"> <!-- Content Header (Page header) -->
 <section class="content-header no-margin">
-<h1 class="text-center tituloPage">Novo Aluno - Dados Pessoais</h1>
+<h1 class="text-center tituloPage">Novo Auxiliar - Dados Pessoais</h1>
 </section> <!-- Main content --> <section class="content"> <!-- MAILBOX BEGIN -->
 <div class="mailbox row">
 	<div class="col-xs-12">
@@ -29,8 +21,30 @@
 				<div class="row">
 					<div class="col-md-12">
 
-						<form:form action="funcionario-cradastrar-auxiliar" method="POST"
-							modelAttribute="aluno" class="form-horizontal" id="form-main">
+						<c:if test="${msgType.equals('success')}">
+							<div class="alert alert-success">
+								<a href="#" class="alert-link">${msg}</a>
+							</div>
+						</c:if>
+						<c:if test="${msg.equals('alert')}">
+							<div class="alert alert-info">
+								<a href="#" class="alert-link">${msg}</a>
+							</div>
+						</c:if>
+						<c:if test="${msg.equals('warning')}">
+							<div class="alert alert-warning">
+								<a href="#" class="alert-link">${msg}</a>
+							</div>
+						</c:if>
+						<c:if test="${msgType == ('danger')}">
+							<div class="alert alert-danger">
+								<a href="#" class="alert-link">${msg}</a>
+							</div>
+						</c:if>
+
+						<form:form action="/scai_projectV-web/aluno-cadastrar/"
+							method="POST" modelAttribute="aluno" class="form-horizontal"
+							id="form-main">
 							<div class="step1">
 								<div class="form-group">
 									<form:label class="col-sm-2" path="nome">Nome:</form:label>
@@ -129,68 +143,9 @@
 									</div>
 								</div>
 
-								<div class="form-group">
-									<form:label path="nomeResponsavel" class="col-sm-2">Responsável:</form:label>
-									<div class="col-sm-4">
-										<form:input path="nomeResponsavel" class="form-control"
-											type="text" placeholder="Nome do responsável" />
-									</div>
-									<form:label path="rgResponsavel" class="col-sm-1">RG:</form:label>
-									<div class="col-sm-4">
-										<form:input path="rgResponsavel" class="form-control rg"
-											type="text" placeholder="Rg do responsável" />
-									</div>
-								</div>
-
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary nextStep">Seguinte</button>
+									<button type="submit" class="btn btn-primary nextStep">Seguinte</button>
 								</div>
-
-							</div>
-
-							<div class="step2">
-
-								<table id="turma-table"
-									class="table table-bordered table-striped">
-									<thead>
-										<tr>
-											<th width="8%">Matéria</th>
-											<th width="25%">Turma</th>
-											<th width="25%">Horário</th>
-											<th width="10%">Inicío</th>
-											<th width="13%">Vagas</th>
-											<th width="9%">Valor</th>
-											<th width="10%">Opção</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${turmas}" var="turma">
-											<tr>
-												<td>${turma.materia.nome}</td>
-												<td>${turma.nomeTurma}</td>
-												<td><c:forEach items="${turma.horariosAulas}"
-														var="horario">
-														<p>${horario.diaSemana} das ${horario.horarioInicio}
-															até ${horario.horarioTermino}</p>
-													</c:forEach></td>
-												<td>${turma.previsaoInicio}</td>
-												<td>
-													<div class="progress progress-striped active">
-														<div class="progress-bar" role="progressbar"
-															aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
-															style="width: ${turma.vagasDisponiveis}%" value="tte">
-															<span class="sr-only"></span>${turma.alunosMatriculados}/${turma.vagasDisponiveis}
-														</div>
-													</div> 
-												</td>
-												<td>R$ ${turma.valorCurso }</td>
-												<td>
-													<button class="btn btn-success btn-flat">Matricular</button>
-												</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
 
 
 							</div>
@@ -216,6 +171,3 @@
 <!-- MAILBOX END --> </section> <!-- /.content --> </aside>
 <!-- /.right-side -->
 
-<script>
-	$("#turma-table").dataTable();
-</script>

@@ -77,7 +77,7 @@ public class FuncionarioController {
 		ModelAndView view = new ModelAndView(RETURN_NOVO_DOCENTE);
 
 		view.addObject("materias", materiaService.buscarTodos());
-		view.addObject("docente", new Funcionario());
+		view.addObject("docente", new Funcionario());		
 
 		return view;
 	}

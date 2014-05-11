@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -38,7 +39,7 @@ public class Funcionario extends Pessoa {
 	
 	private Double salario;
 	
-	@ManyToMany(mappedBy = "funcionarios")
+	@ManyToMany
 	private List<Materia> materia = new ArrayList<Materia>();
 	
 	private Short diaVencimentoSalario;

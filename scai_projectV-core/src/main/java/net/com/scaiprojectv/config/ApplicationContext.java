@@ -33,7 +33,7 @@ import com.jolbox.bonecp.BoneCPDataSource;
  * Developed by Paulo Garcia
  */
 @Configuration
-@ComponentScan(basePackages = {"net.com.scaiprojectv.service","net.com.scaiprojectv.repository.impl"})
+@ComponentScan(basePackages = {"net.com.scaiprojectv.service","net.com.scaiprojectv.repository.impl","net.com.scaiprojectv.model"})
 @ImportResource("classpath:applicationcontext.xml")
 @PropertySource("classpath:application.properties")
 public class ApplicationContext {

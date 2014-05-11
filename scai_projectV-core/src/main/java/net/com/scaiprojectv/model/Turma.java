@@ -3,11 +3,8 @@
  */
 package net.com.scaiprojectv.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import net.com.scaiprojectv.model.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,12 +15,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /**
  * Comment(s): Classe de modelo da entidade Turma.
@@ -53,14 +51,11 @@ public class Turma {
 	@Temporal(TemporalType.DATE)
 	private Date previsaoTermino;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST })
-	@JoinColumn(name = "id_docente")
+	@ManyToOne
 	private Funcionario docente;
 
-	@ManyToMany(mappedBy = "turmas", fetch = FetchType.EAGER)
-	private List<Matricula> matriculas = new ArrayList<Matricula>();
-
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<HorarioDiaAula> horariosAulas;
 
 	private String nomeTurma;
@@ -72,12 +67,19 @@ public class Turma {
 
 	private Integer alunosMatriculados;
 
-	public List<Matricula> getMatriculas() {
-		return matriculas;
+	@OneToOne(mappedBy = "turma",cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+	private Matricula matricula;
+
+	public Matricula getMatricula() {
+		return matricula;
 	}
 
-	public void setMatriculas(List<Matricula> matriculas) {
-		this.matriculas = matriculas;
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Integer getAlunosMatriculados() {
@@ -154,6 +156,10 @@ public class Turma {
 
 	public void setValorCurso(Double valorCurso) {
 		this.valorCurso = valorCurso;
+	}
+
+	public Double getPorcentagemDeVagasDisponiveis() {
+		return (double) (alunosMatriculados * 100) / vagasDisponiveis;
 	}
 
 }

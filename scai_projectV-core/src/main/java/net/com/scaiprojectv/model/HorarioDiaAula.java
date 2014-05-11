@@ -17,6 +17,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 /**
  * Comment(s): 
  * 
@@ -42,7 +45,7 @@ public class HorarioDiaAula {
 	
 	private String horarioTermino;
 	
-	@ManyToMany(mappedBy = "horariosAulas",fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "horariosAulas")
 	private List<Turma> turmas;
 
 	public List<Turma> getTurmas() {

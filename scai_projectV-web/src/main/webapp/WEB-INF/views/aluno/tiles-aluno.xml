@@ -4,8 +4,13 @@
               "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+	<definition name="novo-turma" extends="base.definition">
+		<put-attribute name="title" value="SCAI - Teste"/>
+		<put-attribute name="body" value="/WEB-INF/views/aluno/novo-turma.jsp"></put-attribute>		
+	</definition>
+	
 	<definition name="novo-aluno" extends="base.definition">
 		<put-attribute name="title" value="SCAI - Teste"/>
-		<put-attribute name="body" value="/WEB-INF/views/aluno/novo.jsp"></put-attribute>		
+		<put-attribute name="body" value="/WEB-INF/views/aluno/novo-aluno.jsp"></put-attribute>		
 	</definition>
 </tiles-definitions>
