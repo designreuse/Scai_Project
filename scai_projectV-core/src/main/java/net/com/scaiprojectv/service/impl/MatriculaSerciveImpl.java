@@ -51,9 +51,8 @@ public class MatriculaSerciveImpl implements MatriculaService {
 	}
 
 	public Matricula salvarTurma(Matricula matricula) throws NotFoundException {
-		Matricula matriculaRetorno = matriculaRepository.findOne(matricula.getId());
 		Turma turmaRetorno = turmaService.buscarRegistro(matricula.getTurma().getId());
-		
+		Matricula matriculaRetorno = matriculaRepository.findOne(matricula.getId());
 
 		if (matriculaRetorno == null) {
 			throw new NotFoundException(
@@ -69,6 +68,7 @@ public class MatriculaSerciveImpl implements MatriculaService {
 
 		turmaRetorno.setAlunosMatriculados(turmaRetorno.getAlunosMatriculados() + 1);
 		matriculaRetorno.setTurma(turmaRetorno);
+		turmaRetorno.setMatricula(matriculaRetorno);
 
 		return salvar(matriculaRetorno);
 	}

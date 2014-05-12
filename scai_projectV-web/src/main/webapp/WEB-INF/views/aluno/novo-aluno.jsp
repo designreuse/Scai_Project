@@ -7,7 +7,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page isELIgnored="false"%>
 
-<script src="js/funcionario/form.js" type="text/javascript"></script>
+<script src="/scai_projectV-web/js/funcionario/form.js"
+	type="text/javascript"></script>
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side"> <!-- Content Header (Page header) -->
@@ -52,6 +53,7 @@
 										<form:input type="text" class="form-control"
 											placeholder="Nome do aluno" path="nome"></form:input>
 									</div>
+									<form:hidden path="id" value="${aluno.id}"/>
 								</div>
 
 								<div class="form-group">
@@ -144,9 +146,49 @@
 								</div>
 
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary nextStep">Seguinte</button>
+									<button type="button" class="btn btn-primary nextStep">Seguinte</button>
 								</div>
 
+
+							</div>
+							<div class="step2">
+								<div class="form-group">
+									<form:label class="col-sm-2" path="pagamento.tipoPagamento">Pagamento:</form:label>
+									<div class="col-xs-9">
+										<form:select class="form-control" path="pagamento.tipoPagamento">
+											<option value="CARTAO">PAGSEGURO</option>
+											<option value="PARCELAMENTO">PARCELADO</option>
+										</form:select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<form:label class="col-sm-2" path="pagamento.tipoPagamento">Qnt Parcela:</form:label>
+									<div class="col-xs-9">
+										<form:select class="form-control" path="pagamento.quantidadeParcela">
+											<option value="1">1 Parcela</option>
+											<option value="2">2 Parcelas</option>
+											<option value="3">3 Parcelas</option>
+											<option value="4">4 Parcelas</option>
+											<option value="5">5 Parcelas</option>
+											<option value="6">6 Parcelas</option>
+										</form:select>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<form:label class="col-sm-2" path="sobrenome">Dia de vencimento:</form:label>
+									<div class="col-xs-9">
+										<form:input type="text" class="form-control"
+											placeholder="Dia do vencimento da mensalidade" path="pagamento.diaVencimento"></form:input>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button"
+										class="btn btn-primary backStep pull-left">Voltar</button>
+									<button type="submit" class="btn btn-primary">Cadastrar</button>
+								</div>
 
 							</div>
 

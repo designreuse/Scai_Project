@@ -3,6 +3,7 @@
  */
 package net.com.scaiprojectv.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +49,19 @@ public class Aluno extends Pessoa {
 
 	@OneToMany(mappedBy = "aluno", cascade = { CascadeType.PERSIST,
 			CascadeType.MERGE })
-	private List<Matricula> matriculas;
+	private List<Matricula> matriculas = new ArrayList<Matricula>();
+
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "id_pagamento")
+	private Pagamento pagamento;
+
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
 
 	public Short getDiaVencimentoMensalidade() {
 		return diaVencimentoMensalidade;

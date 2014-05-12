@@ -98,7 +98,7 @@
 										</td>
 										<td>R$ ${turma.valorCurso }</td>
 										<td><a
-											href="/scai_projectV-web/aluno-cadastrarturma/${idMatricula}/${turma.id}"
+											href="/scai_projectV-web/aluno-novo/${turma.id}"
 											class="btn btn-success btn-flat">Matricular</a></td>
 									</tr>
 								</c:forEach>

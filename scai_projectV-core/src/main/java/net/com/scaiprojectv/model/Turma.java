@@ -67,7 +67,7 @@ public class Turma {
 
 	private Integer alunosMatriculados;
 
-	@OneToOne(mappedBy = "turma",cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
 	private Matricula matricula;
 
 	public Matricula getMatricula() {

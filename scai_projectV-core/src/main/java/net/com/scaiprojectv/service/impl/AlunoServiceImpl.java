@@ -43,13 +43,6 @@ public class AlunoServiceImpl implements AlunoService {
 			throw new Exception("O CPF [" + aluno.getCpf()
 					+ "] já está registrado na base de dados!");
 		}
-
-		List<Matricula> matriculas = new ArrayList<Matricula>();
-		Matricula matricula = new Matricula();
-		matricula.setDataMatricula(new Date());
-		matriculas.add(matricula);
-		aluno.setMatriculas(matriculas);
-		matricula.setAluno(aluno);
 		return repository.save(aluno);
 
 	}

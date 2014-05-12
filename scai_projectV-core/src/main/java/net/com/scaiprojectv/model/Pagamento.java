@@ -13,15 +13,15 @@ import javax.persistence.Id;
 import net.com.scaiprojectv.enumerator.TipoPagamentoEnum;
 
 /**
- * Comment(s): 
+ * Comment(s):
  * 
  * @author Paulo Garcia
  * @Feb 26, 2014
  * @5:24:08 PM
- *
- * Scai Project_V®
- *
- * Developed by Paulo Garcia
+ * 
+ *          Scai Project_V®
+ * 
+ *          Developed by Paulo Garcia
  */
 @Entity
 public class Pagamento {
@@ -29,13 +29,13 @@ public class Pagamento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Enumerated(EnumType.STRING)
 	private TipoPagamentoEnum tipoPagamento;
-	
+
 	private Integer quantidadeParcela;
-	
-	private Long diaVencimento;
+
+	private Integer diaVencimento;
 
 	public Long getId() {
 		return id;
@@ -61,14 +61,12 @@ public class Pagamento {
 		this.quantidadeParcela = quantidadeParcela;
 	}
 
-	public Long getDiaVencimento() {
+	public Integer getDiaVencimento() {
 		return diaVencimento;
 	}
 
-	public void setDiaVencimento(Long diaVencimento) {
+	public void setDiaVencimento(Integer diaVencimento) {
 		this.diaVencimento = diaVencimento;
 	}
-	
-	
-	
+
 }

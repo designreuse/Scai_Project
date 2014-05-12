@@ -42,7 +42,7 @@ public class Matricula {
 
 	private Date dataMatricula;
 
-	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE,CascadeType.DETACH}, fetch = FetchType.EAGER)
 	@JoinColumn(name = "turma_id")
 	private Turma turma;
 
