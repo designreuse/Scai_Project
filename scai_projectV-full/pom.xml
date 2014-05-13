@@ -22,6 +22,12 @@
 	</properties>
 
 	<dependencies>
+	
+	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.0.2.RELEASE</version>
+		</dependency>
 
 		<!-- Log4j -->
 		<dependency>

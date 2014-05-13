@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javassist.NotFoundException;
+import net.com.scaiprojectv.dto.Email;
 import net.com.scaiprojectv.dto.GerarMensalidadesDTO;
 import net.com.scaiprojectv.editor.CustomMateriaEditor;
 import net.com.scaiprojectv.enumerator.TipoPagamentoEnum;
@@ -21,6 +22,7 @@ import net.com.scaiprojectv.service.TurmaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -53,6 +55,9 @@ public class AlunoController {
 	private static final String RETURN_NOVO_ALUNO = "novo-aluno";
 
 	@Autowired
+	private Email mail;
+	
+	@Autowired
 	private TurmaService turmaService;
 
 	@Autowired
@@ -75,6 +80,7 @@ public class AlunoController {
 	@ResponseBody
 	public ModelAndView novoCurso() {
 		ModelAndView view = new ModelAndView(RETURN_TURMA);
+		mail.enviar();
 		view.addObject("turmas", turmaService.buscarTodos());
 		return view;
 	}
@@ -160,6 +166,7 @@ public class AlunoController {
 					alunoRetorno.getPagamento().getId());
 
 			mensalidadeService.salvarMensalidades(mensalidade.gerarParcelas());
+			//pagamento via pagseguro
 			}else if(aluno.getPagamento().getTipoPagamento().equals(TipoPagamentoEnum.CARTAO)){
 				PagamentoPagSeguro pagSeguro = new PagamentoPagSeguro(
 						alunoRetorno.getPagamento().getId().toString(),

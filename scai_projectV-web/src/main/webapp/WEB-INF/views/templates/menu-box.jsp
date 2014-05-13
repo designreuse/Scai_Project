@@ -35,7 +35,7 @@
 			<!-- /.search form -->
 			<!-- sidebar menu: : style can be found in sidebar.less -->
 			<ul class="sidebar-menu">
-				<li class="active"><a href="../index.html"> <i
+				<li class="active"><a href="/scai_projectV-web/dashboard"> <i
 						class="fa fa-dashboard"></i> <span>Dashboard</span>
 				</a></li>
 				<li class="treeview"><a href="#"> <i
@@ -43,7 +43,7 @@
 						class="fa fa-angle-left pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
-						<li><a href="aluno-novo"><i
+						<li><a href="/scai_projectV-web/aluno-curso"><i
 								class="fa fa-angle-double-right"></i> Novo</a></li>
 						<li><a href="charts/flot.html"><i
 								class="fa fa-angle-double-right"></i> Gerenciar</a></li>
@@ -52,31 +52,31 @@
 						<span>Colaborador</span> <i class="fa fa-angle-left pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
-						<li><a href="funcionario-novo-docente"><i
+						<li><a href="/scai_projectV-web/funcionario-novo-docente"><i
 								class="fa fa-angle-double-right"></i> Novo docente</a></li>
-						<li><a href="funcionario-novo-auxiliar"><i
+						<li><a href="/scai_projectV-web/funcionario-novo-auxiliar"><i
 								class="fa fa-angle-double-right"></i> Novo auxiliar</a></li>
 						<li><a href="UI/buttons.html"><i
 								class="fa fa-angle-double-right"></i> Gerenciar docente</a></li>
-						<li><a href="funcionario-gerenciar-auxiliar"><i
+						<li><a href="/scai_projectV-web/funcionario-gerenciar-auxiliar"><i
 								class="fa fa-angle-double-right"></i> Gerenciar auxiliar</a></li>
 					</ul></li>
 				<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
 						<span>Materia</span> <i class="fa fa-angle-left pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
-						<li><a href="materia-novo"><i
+						<li><a href="/scai_projectV-web/materia-novo"><i
 								class="fa fa-angle-double-right"></i> Nova matéria</a></li>
-						<li><a href="materia-gerenciar"><i
+						<li><a href="/scai_projectV-web/materia-gerenciar"><i
 								class="fa fa-angle-double-right"></i> Gerenciar matéria</a></li>
 					</ul></li>
 				<li class="treeview"><a href="#"> <i class="fa fa-table"></i>
 						<span>Turma</span> <i class="fa fa-angle-left pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
-						<li><a href="turma-novo"><i
+						<li><a href="/scai_projectV-web/turma-novo"><i
 								class="fa fa-angle-double-right"></i> Nova turma</a></li>
-						<li><a href="gerenciar-turma"><i
+						<li><a href="/scai_projectV-web/gerenciar-turma"><i
 								class="fa fa-angle-double-right"></i> Gerenciar turma</a></li>
 					</ul></li>
 				<li><a href="calendar.html"> <i class="fa fa-calendar"></i>

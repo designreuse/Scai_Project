@@ -5,7 +5,13 @@ package net.com.saciprojectv.configuration;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonEncoding;
@@ -14,8 +20,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -41,7 +50,7 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "net.com.scaiprojectv.controller"})
+@ComponentScan(basePackages = { "net.com.scaiprojectv.controller" })
 @EnableJpaRepositories(value = { "net.com.scaiprojectv.repository.impl" })
 @Import(value = net.com.scaiprojectv.config.ApplicationContext.class)
 public class ApplicationContext extends WebMvcConfigurerAdapter {
@@ -55,15 +64,21 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 			.getLogger(ApplicationContext.class);
 
 	@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
-        registry.addResourceHandler("/fonts/**").addResourceLocations("/resources/fonts/");
-        registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
-        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
-        registry.addResourceHandler("/less/**").addResourceLocations("/resources/less/");
-    }
-	
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations(
+				"/resources/");
+		registry.addResourceHandler("/css/**").addResourceLocations(
+				"/resources/css/");
+		registry.addResourceHandler("/fonts/**").addResourceLocations(
+				"/resources/fonts/");
+		registry.addResourceHandler("/images/**").addResourceLocations(
+				"/resources/images/");
+		registry.addResourceHandler("/js/**").addResourceLocations(
+				"/resources/js/");
+		registry.addResourceHandler("/less/**").addResourceLocations(
+				"/resources/less/");
+	}
+
 	@Bean
 	public TilesConfigurer configuracaoTiles() {
 		logger.info("Inicializando Tiles Configurer...");
@@ -80,7 +95,7 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 		logger.info("Inicializando Tiles ViewResolver...");
 		return new TilesViewResolver();
 	}
-	
+
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -91,14 +106,13 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
 		return viewResolver;
 	}
-	
+
 	@Bean
 	public ObjectMapper objectMapper() {
 		org.codehaus.jackson.map.ObjectMapper objectMapper = new org.codehaus.jackson.map.ObjectMapper();
 		return objectMapper;
 	}
-	
-	
+
 	@Bean
 	public MappingJacksonJsonView mappingJacksonJsonView() {
 		MappingJacksonJsonView mappingJacksonJsonView = new MappingJacksonJsonView();
@@ -108,12 +122,12 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 		mappingJacksonJsonView.setPrefixJson(false);
 		return mappingJacksonJsonView;
 	}
-	
+
 	@Bean
 	public StringHttpMessageConverter stringHttpMessageConverter() {
-	    return new StringHttpMessageConverter(Charset.forName("UTF-8"));
+		return new StringHttpMessageConverter(Charset.forName("UTF-8"));
 	}
-	
+
 	@Bean
 	public ContentNegotiatingViewResolver contentNegotiatingViewResolver() {
 		List<ViewResolver> viewResolvers = new ArrayList<ViewResolver>();
@@ -133,4 +147,5 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
 		return contentNegotiatingViewResolver;
 	}
+
 }
