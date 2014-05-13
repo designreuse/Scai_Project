@@ -3,14 +3,17 @@
  */
 package net.com.scaiprojectv.controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javassist.NotFoundException;
 import net.com.scaiprojectv.dto.GerarMensalidadesDTO;
 import net.com.scaiprojectv.editor.CustomMateriaEditor;
+import net.com.scaiprojectv.enumerator.TipoPagamentoEnum;
 import net.com.scaiprojectv.model.Aluno;
 import net.com.scaiprojectv.model.Matricula;
 import net.com.scaiprojectv.model.Turma;
+import net.com.scaiprojectv.pagseguro.PagamentoPagSeguro;
 import net.com.scaiprojectv.service.AlunoService;
 import net.com.scaiprojectv.service.MatriculaService;
 import net.com.scaiprojectv.service.MensalidadeService;
@@ -126,8 +129,7 @@ public class AlunoController {
 	@RequestMapping(value = "/aluno-cadastrar", method = RequestMethod.POST)
 	public ModelAndView cadastrarAluno(@ModelAttribute("aluno") Aluno aluno,
 			BindingResult result, RedirectAttributes redirect) {
-		ModelAndView view = new ModelAndView(RETURN_TURMA);
-
+		ModelAndView view = new ModelAndView();
 		Turma turma = new Turma();
 		turma.setId(aluno.getId());
 
@@ -149,27 +151,32 @@ public class AlunoController {
 			Matricula matriculaRetorno = matriculaService
 					.salvarTurma(matricula);
 
+			if(aluno.getPagamento().getTipoPagamento().equals(TipoPagamentoEnum.PARCELAMENTO)){
 			// cadastrar pagamento > mensalidade
 			GerarMensalidadesDTO mensalidade = new GerarMensalidadesDTO(
 					alunoRetorno.getPagamento().getQuantidadeParcela(),
 					alunoRetorno.getPagamento().getDiaVencimento(),
-					matriculaRetorno.getTurma().getValorCurso(), alunoRetorno
-							.getPagamento().getId());
+					matriculaRetorno.getTurma().getValorCurso(), 
+					alunoRetorno.getPagamento().getId());
 
 			mensalidadeService.salvarMensalidades(mensalidade.gerarParcelas());
-
+			}else if(aluno.getPagamento().getTipoPagamento().equals(TipoPagamentoEnum.CARTAO)){
+				PagamentoPagSeguro pagSeguro = new PagamentoPagSeguro(
+						alunoRetorno.getPagamento().getId().toString(),
+						"Matricula na escola de idiomas SCAI",
+						1,
+						new BigDecimal("100.00"));
+				view = new ModelAndView("redirect:"+pagSeguro.gerarPagamento());
+			}
+			
 		} catch (Exception e) {
 			view = new ModelAndView(RETURN_TURMA);
 			redirect.addFlashAttribute("msgType", "danger");
 			redirect.addFlashAttribute("msg", e.getMessage());
 			redirect.addFlashAttribute("aluno", aluno);
+			System.out.println("mensagem: " + e.getMessage());
 			return view;
 		}
-
-		view.addObject("idMatricula", alunoRetorno.getMatriculas().get(0)
-				.getId());
-		view.addObject("turmas", turmaService.buscarTodos());
-		view.addObject("matricula", new Matricula());
 		return view;
 	}
 

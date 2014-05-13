@@ -7,13 +7,14 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page isELIgnored="false"%>
 
-<script src="/scai_projectV-web/js/funcionario/form.js"
+	
+	<script src="/scai_projectV-web/js/aluno/form.js"
 	type="text/javascript"></script>
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side"> <!-- Content Header (Page header) -->
 <section class="content-header no-margin">
-<h1 class="text-center tituloPage">Novo Auxiliar - Dados Pessoais</h1>
+<h1 class="text-center tituloPage">Novo Aluno - Dados Pessoais</h1>
 </section> <!-- Main content --> <section class="content"> <!-- MAILBOX BEGIN -->
 <div class="mailbox row">
 	<div class="col-xs-12">
@@ -154,24 +155,44 @@
 							<div class="step2">
 								<div class="form-group">
 									<form:label class="col-sm-2" path="pagamento.tipoPagamento">Pagamento:</form:label>
-									<div class="col-xs-9">
-										<form:select class="form-control" path="pagamento.tipoPagamento">
-											<option value="CARTAO">PAGSEGURO</option>
-											<option value="PARCELAMENTO">PARCELADO</option>
+									<div class="col-xs-8">
+										<form:select class="form-control" path="pagamento.tipoPagamento" id="tpPagamento">
+											<option value="A_VISTA"> à Vista</option>
+											<option value="CARTAO">Cartão - PagSeguro</option>
+											<option value="PARCELAMENTO">Mensalidade</option>
+											<option value="NAO_DEFINIDO">Outro</option>
 										</form:select>
+									</div>
+									<div class="col-xs-1 money-icon">
+										<img src="/scai_projectV-web/images/cash32.png" alt="à Vista">
+									</div>
+									<div class="col-xs-1 card-icon">
+										<img src="/scai_projectV-web/images/pagseguro.jpg" alt="Cartão - PagSeguro">
+									</div>
+									<div class="col-xs-1 boleto-icon">
+										<img src="/scai_projectV-web/images/boleto.png" alt="Mensalidade">
+									</div>
+									<div class="col-xs-1 none-icon">
+										<img src="/scai_projectV-web/images/none.png" alt="Outro">
 									</div>
 								</div>
 
 								<div class="form-group">
 									<form:label class="col-sm-2" path="pagamento.tipoPagamento">Qnt Parcela:</form:label>
 									<div class="col-xs-9">
-										<form:select class="form-control" path="pagamento.quantidadeParcela">
+										<form:select class="form-control" path="pagamento.quantidadeParcela" >
 											<option value="1">1 Parcela</option>
 											<option value="2">2 Parcelas</option>
 											<option value="3">3 Parcelas</option>
 											<option value="4">4 Parcelas</option>
 											<option value="5">5 Parcelas</option>
 											<option value="6">6 Parcelas</option>
+											<option value="7">7 Parcelas</option>
+											<option value="8">8 Parcelas</option>
+											<option value="9">9 Parcelas</option>
+											<option value="10">10 Parcelas</option>
+											<option value="11">11 Parcelas</option>
+											<option value="12">12 Parcelas</option>
 										</form:select>
 									</div>
 								</div>
