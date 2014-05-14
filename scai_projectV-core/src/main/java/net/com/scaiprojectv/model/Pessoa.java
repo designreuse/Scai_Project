@@ -96,7 +96,7 @@ public abstract class Pessoa {
 	}
 
 	public String getTelefone() {
-		return ddd + telefone;
+		return telefone;
 	}
 
 	public void setTelefone(String telefone) {

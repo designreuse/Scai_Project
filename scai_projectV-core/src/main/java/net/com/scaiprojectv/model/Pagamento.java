@@ -36,6 +36,16 @@ public class Pagamento {
 	private Integer quantidadeParcela;
 
 	private Integer diaVencimento;
+	
+	private String observacao;
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
 
 	public Long getId() {
 		return id;

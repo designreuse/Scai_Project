@@ -37,6 +37,14 @@
 			<version>4.2.0.Final</version>
 		</dependency>
 
+		<!-- Java Mail -->
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+
 		<!-- JACKSON -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>

@@ -7,12 +7,15 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import javassist.NotFoundException;
-import net.com.scaiprojectv.dto.Email;
+import net.com.scaiprojectv.dto.SendEmailDTO;
 import net.com.scaiprojectv.dto.GerarMensalidadesDTO;
 import net.com.scaiprojectv.editor.CustomMateriaEditor;
+import net.com.scaiprojectv.enumerator.StatusPagamento;
 import net.com.scaiprojectv.enumerator.TipoPagamentoEnum;
 import net.com.scaiprojectv.model.Aluno;
 import net.com.scaiprojectv.model.Matricula;
+import net.com.scaiprojectv.model.Mensalidade;
+import net.com.scaiprojectv.model.Pagamento;
 import net.com.scaiprojectv.model.Turma;
 import net.com.scaiprojectv.pagseguro.PagamentoPagSeguro;
 import net.com.scaiprojectv.service.AlunoService;
@@ -53,9 +56,10 @@ public class AlunoController {
 	private static final String REDIRECT_NOVO_ALUNO = "redirect:/aluno-novo";
 	private static final String REDIRECT_ALUNO_CURSO = "redirect:/aluno-curso";
 	private static final String RETURN_NOVO_ALUNO = "novo-aluno";
+	private static final String RETURN_DASHBOARD = "dashboard";
 
 	@Autowired
-	private Email mail;
+	private SendEmailDTO mail;
 	
 	@Autowired
 	private TurmaService turmaService;
@@ -80,7 +84,6 @@ public class AlunoController {
 	@ResponseBody
 	public ModelAndView novoCurso() {
 		ModelAndView view = new ModelAndView(RETURN_TURMA);
-		mail.enviar();
 		view.addObject("turmas", turmaService.buscarTodos());
 		return view;
 	}
@@ -92,9 +95,9 @@ public class AlunoController {
 	}
 
 	@RequestMapping(value = "/aluno-novo/{idTurma}")
-	public ModelAndView novoAluno(@PathVariable("idTurma") Long idTurma) {
+	public ModelAndView novoAluno(@PathVariable("idTurma") Long idTurma,RedirectAttributes redirect) {
 		ModelAndView view = new ModelAndView(RETURN_NOVO_ALUNO);
-
+redirect.getFlashAttributes();
 		Aluno aluno = new Aluno();
 		aluno.setId(idTurma);
 
@@ -135,7 +138,7 @@ public class AlunoController {
 	@RequestMapping(value = "/aluno-cadastrar", method = RequestMethod.POST)
 	public ModelAndView cadastrarAluno(@ModelAttribute("aluno") Aluno aluno,
 			BindingResult result, RedirectAttributes redirect) {
-		ModelAndView view = new ModelAndView();
+		ModelAndView view = new ModelAndView(RETURN_DASHBOARD);
 		Turma turma = new Turma();
 		turma.setId(aluno.getId());
 
@@ -145,7 +148,7 @@ public class AlunoController {
 
 		aluno.getMatriculas().add(matricula);
 		aluno.setId(null);
-
+		
 		Aluno alunoRetorno = new Aluno();
 
 		try {
@@ -168,23 +171,39 @@ public class AlunoController {
 			mensalidadeService.salvarMensalidades(mensalidade.gerarParcelas());
 			//pagamento via pagseguro
 			}else if(aluno.getPagamento().getTipoPagamento().equals(TipoPagamentoEnum.CARTAO)){
+				turma = turmaService.buscarRegistro(turma.getId());
 				PagamentoPagSeguro pagSeguro = new PagamentoPagSeguro(
-						alunoRetorno.getPagamento().getId().toString(),
-						"Matricula na escola de idiomas SCAI",
-						1,
-						new BigDecimal("100.00"));
-				view = new ModelAndView("redirect:"+pagSeguro.gerarPagamento());
+						alunoRetorno,
+						turma,
+						1);
+				
+				mail.enviar(alunoRetorno, pagSeguro.gerarPagamento());
+				mensalidadeService.salvarMensalidade(setMensalidade(turma, alunoRetorno, StatusPagamento.PAGAMENTO_TOTAL));
+				//pagamento a vista
+			}else if(aluno.getPagamento().getTipoPagamento().equals(TipoPagamentoEnum.A_VISTA)){
+				mensalidadeService.salvarMensalidade(setMensalidade(turma, alunoRetorno, StatusPagamento.PAGAMENTO_TOTAL));
 			}
 			
 		} catch (Exception e) {
-			view = new ModelAndView(RETURN_TURMA);
-			redirect.addFlashAttribute("msgType", "danger");
-			redirect.addFlashAttribute("msg", e.getMessage());
-			redirect.addFlashAttribute("aluno", aluno);
-			System.out.println("mensagem: " + e.getMessage());
+			view = new ModelAndView(RETURN_NOVO_ALUNO);
+			aluno.setId(turma.getId());
+			view.addObject("msgType", "danger");
+			view.addObject("msg", e.getMessage());
+			view.addObject("aluno", aluno);
 			return view;
 		}
 		return view;
 	}
 
+	private Mensalidade setMensalidade(Turma turma, Aluno aluno, StatusPagamento status){
+		turma = turmaService.buscarRegistro(turma.getId());
+		Mensalidade mensalidade = new Mensalidade();
+		Pagamento pagamento = new Pagamento();
+		mensalidade.setStatusPagamento(status);
+		mensalidade.setValorPago(turma.getValorCurso());
+		pagamento.setId(aluno.getPagamento().getId());
+		mensalidade.setPagamento(pagamento);
+		return mensalidade;
+	}
+	
 }

@@ -7,9 +7,8 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page isELIgnored="false"%>
 
-	
-	<script src="/scai_projectV-web/js/aluno/form.js"
-	type="text/javascript"></script>
+<script src="/scai_projectV-web/js/blockUI.js"></script>
+<script src="/scai_projectV-web/js/aluno/form.js" type="text/javascript"></script>
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side"> <!-- Content Header (Page header) -->
@@ -52,16 +51,16 @@
 									<form:label class="col-sm-2" path="nome">Nome:</form:label>
 									<div class="col-xs-9">
 										<form:input type="text" class="form-control"
-											placeholder="Nome do aluno" path="nome"></form:input>
+											placeholder="Nome do aluno" path="nome" value="${aluno.nome}"></form:input>
 									</div>
-									<form:hidden path="id" value="${aluno.id}"/>
+									<form:hidden path="id" value="${aluno.id}" />
 								</div>
 
 								<div class="form-group">
 									<form:label class="col-sm-2" path="sobrenome">Sobrenome:</form:label>
 									<div class="col-xs-9">
 										<form:input type="text" class="form-control"
-											placeholder="Sobrenome do aluno" path="sobrenome"></form:input>
+											placeholder="Sobrenome do aluno" path="sobrenome" value="${aluno.sobrenome}"></form:input>
 									</div>
 								</div>
 
@@ -74,7 +73,7 @@
 
 									<form:label class="col-sm-1" path="dataNascimento">Sexo:</form:label>
 									<div class="col-xs-4">
-										<form:select path="sexo" class="form-control">
+										<form:select path="sexo" class="form-control" value="${aluno.sexo}">
 											<option value="masculino">Masculino</option>
 											<option value="feminino">Feminino</option>
 										</form:select>
@@ -86,20 +85,20 @@
 									<form:label class="col-sm-2" path="rg">RG:</form:label>
 									<div class="col-xs-4">
 										<form:input type="text" class="form-control RG"
-											placeholder="Registro geral" path="rg"></form:input>
+											placeholder="Registro geral" path="rg" value="${aluno.rg}"></form:input>
 									</div>
 
 									<form:label class="col-sm-1" path="cpf">CPF:</form:label>
 									<div class="col-xs-4">
 										<form:input type="text" class="form-control cpf"
-											placeholder="Cadastro pessoal fisíca" path="cpf"></form:input>
+											placeholder="Cadastro pessoal fisíca" path="cpf" value="${aluno.cpf}"></form:input>
 									</div>
 								</div>
 
 								<div class="form-group">
 									<form:label path="cidade.estado" class="col-sm-2">Estado:</form:label>
 									<div class="col-xs-9">
-										<form:select path="cidade.estado" class="form-control"
+										<form:select path="cidade.estado" class="form-control" value="${aluno.cidade.estado}"
 											id="estado">
 											<form:option value="SAO_PAULO">São Paulo</form:option>
 											<form:option value="MINAS_GERAIS">Minas Gerais</form:option>
@@ -111,7 +110,7 @@
 								<div class="form-group">
 									<form:label path="cidade.nome" class="col-sm-2">Estado:</form:label>
 									<div class="col-xs-9">
-										<form:select path="cidade.nome" class="form-control">
+										<form:select path="cidade.nome" class="form-control" value="${aluno.cidade.nome}">
 											<form:option value="SAO_PAULO">Fernandópolis</form:option>
 											<form:option value="MINAS_GERAIS">Jales</form:option>
 											<form:option value="MATO_GROSSO">São José dos Campos</form:option>
@@ -120,9 +119,9 @@
 								</div>
 
 								<div class="form-group">
-									<form:label path="cidade.cep" class="col-sm-2">CEP:</form:label>
+									<form:label path="cidade.cep" class="col-sm-2" >CEP:</form:label>
 									<div class="col-sm-9">
-										<form:input path="cidade.cep" placeholder="Cep"
+										<form:input path="cidade.cep" placeholder="Cep" value="${aluno.cidade.cep}"
 											class="form-control cep" type="text" />
 									</div>
 								</div>
@@ -131,18 +130,18 @@
 									<form:label class="col-sm-2" path="ddd">Telefone:</form:label>
 									<div class="col-xs-1">
 										<form:input type="text" class="form-control ddd"
-											placeholder="DDD" path="ddd"></form:input>
+											placeholder="DDD" path="ddd" value="${aluno.ddd}"></form:input>
 									</div>
 									<div class="col-xs-8">
 										<form:input type="text" class="form-control phone"
-											placeholder="Número do telefone" path="telefone"></form:input>
+											placeholder="Número do telefone" path="telefone" value="${aluno.telefone}"></form:input>
 									</div>
 								</div>
 								<div class="form-group">
 									<form:label path="email" class="col-sm-2">E-mail:</form:label>
 									<div class="col-sm-9">
 										<form:input path="email" class="form-control" type="text"
-											placeholder="E-mail" />
+											placeholder="E-mail" value="${aluno.email}" />
 									</div>
 								</div>
 
@@ -156,8 +155,9 @@
 								<div class="form-group">
 									<form:label class="col-sm-2" path="pagamento.tipoPagamento">Pagamento:</form:label>
 									<div class="col-xs-8">
-										<form:select class="form-control" path="pagamento.tipoPagamento" id="tpPagamento">
-											<option value="A_VISTA"> à Vista</option>
+										<form:select class="form-control"
+											path="pagamento.tipoPagamento" id="tpPagamento" value="${aluno.pagamento.tipoPagamento}">
+											<option value="A_VISTA">à Vista</option>
 											<option value="CARTAO">Cartão - PagSeguro</option>
 											<option value="PARCELAMENTO">Mensalidade</option>
 											<option value="NAO_DEFINIDO">Outro</option>
@@ -167,20 +167,23 @@
 										<img src="/scai_projectV-web/images/cash32.png" alt="à Vista">
 									</div>
 									<div class="col-xs-1 card-icon">
-										<img src="/scai_projectV-web/images/pagseguro.jpg" alt="Cartão - PagSeguro">
+										<img src="/scai_projectV-web/images/pagseguro.jpg"
+											alt="Cartão - PagSeguro">
 									</div>
 									<div class="col-xs-1 boleto-icon">
-										<img src="/scai_projectV-web/images/boleto.png" alt="Mensalidade">
+										<img src="/scai_projectV-web/images/boleto.png"
+											alt="Mensalidade">
 									</div>
 									<div class="col-xs-1 none-icon">
 										<img src="/scai_projectV-web/images/none.png" alt="Outro">
 									</div>
 								</div>
 
-								<div class="form-group">
-									<form:label class="col-sm-2" path="pagamento.tipoPagamento">Qnt Parcela:</form:label>
+								<div class="form-group" id="parcelas">
+									<form:label class="col-sm-2"  path="pagamento.tipoPagamento">Qnt Parcela:</form:label>
 									<div class="col-xs-9">
-										<form:select class="form-control" path="pagamento.quantidadeParcela" >
+										<form:select class="form-control"
+											path="pagamento.quantidadeParcela">
 											<option value="1">1 Parcela</option>
 											<option value="2">2 Parcelas</option>
 											<option value="3">3 Parcelas</option>
@@ -196,19 +199,29 @@
 										</form:select>
 									</div>
 								</div>
-								
-								<div class="form-group">
-									<form:label class="col-sm-2" path="sobrenome">Dia de vencimento:</form:label>
-									<div class="col-xs-9">
+
+								<div class="form-group" id="diaVencimento">
+									<form:label class="col-sm-2" path="pagamento.diaVencimento">Dia de vencimento:</form:label>
+									<div class="col-xs-9" >
 										<form:input type="text" class="form-control"
-											placeholder="Dia do vencimento da mensalidade" path="pagamento.diaVencimento"></form:input>
+											placeholder="Dia do vencimento da mensalidade" 
+											path="pagamento.diaVencimento"></form:input>
+									</div>
+								</div>
+								
+								<div class="form-group" id="obs">
+									<form:label class="col-sm-2" path="pagamento.observacao" >Observações:</form:label>
+									<div class="col-xs-9" > 
+										<form:textarea type="text" class="form-control"
+											placeholder="Observações gerais sobre o pagamento"  value="${aluno.pagamento.observacao}"
+											path="pagamento.observacao"></form:textarea>
 									</div>
 								</div>
 
 								<div class="modal-footer">
 									<button type="button"
 										class="btn btn-primary backStep pull-left">Voltar</button>
-									<button type="submit" class="btn btn-primary">Cadastrar</button>
+									<button type="submit" id="btnCadastrar" class="btn btn-primary">Cadastrar</button>
 								</div>
 
 							</div>
@@ -234,3 +247,49 @@
 <!-- MAILBOX END --> </section> <!-- /.content --> </aside>
 <!-- /.right-side -->
 
+<script>
+	$(document).ready(function() {
+		$('#btnCadastrar').click(function() {
+			$.blockUI({
+				message: '<h1><img src="http://s13.postimg.org/80vkv0coz/image.gif" /> Processando...</h1>'
+			});
+		});
+
+		$(document).ready(function() {
+			$('#testedemo').click(function() {
+				$.blockUI({
+					message : "<h2>Testando</h2>",
+					fadeIn : 700,
+					fadeOut : 700,
+					timeout : 2000,
+					showOverlay : false,
+					centerY : false,
+					css : {
+						width : '250px',
+						top : '15%',
+						left : '',
+						right : '10px',
+						border : 'none',
+						padding : '5px',
+						backgroundColor : '#000',
+						'-webkit-border-radius' : '10px',
+						'-moz-border-radius' : '10px',
+						opacity : .6,
+						color : '#fff',
+					}
+				});
+			});
+		});
+	});
+	
+	$('#custommessage').click(function()
+			{
+				$.blockUI(
+				{
+					/*
+						message displayed when blocking (use null for no message)
+					*/
+					message: '<h1><img src="http://s13.postimg.org/80vkv0coz/image.gif" /> Please Wait Custom Message...</h1>'
+				});
+			});
+</script>

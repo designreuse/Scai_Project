@@ -46,7 +46,6 @@ public class TurmaRepositoryTest {
 		turma.setPrevisaoInicio(new Date());
 		turma.setPrevisaoTermino(new Date());
 		turma.setVagasDisponiveis(10);
-		turma.setValorCurso(1000.00);
 		
 		horario.setDiaSemana("segunda-feira");
 		horario.setHorarioInicio("15h00");

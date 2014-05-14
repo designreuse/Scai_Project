@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import net.com.scaiprojectv.enumerator.TipoPagamentoEnum;
 import net.com.scaiprojectv.model.Aluno;
 import net.com.scaiprojectv.model.Matricula;
 import net.com.scaiprojectv.predicate.AlunoPredicate;
@@ -43,6 +44,13 @@ public class AlunoServiceImpl implements AlunoService {
 			throw new Exception("O CPF [" + aluno.getCpf()
 					+ "] já está registrado na base de dados!");
 		}
+
+		if (aluno.getPagamento().getTipoPagamento()
+				.equals(TipoPagamentoEnum.A_VISTA)){
+			aluno.getPagamento().setQuantidadeParcela(0);
+			aluno.getPagamento().setDiaVencimento(0);
+		}
+
 		return repository.save(aluno);
 
 	}

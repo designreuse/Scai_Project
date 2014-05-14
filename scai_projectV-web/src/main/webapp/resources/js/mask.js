@@ -7,7 +7,7 @@ $(document).ready(function(){
   $('.day').mask('00');
   $('.hour').mask('00H00m');
   $('.numbers').mask('0000000');
-  $('.phone').mask('0 0000-0000');
+  $('.phone').mask('000000000');
   $('.phone_with_ddd').mask('(00) 0000-0000');
   $('.phone_us').mask('(000) 000-0000');
   $('.mixed').mask('AAA 000-S0S');

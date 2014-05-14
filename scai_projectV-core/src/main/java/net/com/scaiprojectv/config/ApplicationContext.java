@@ -110,16 +110,4 @@ public class ApplicationContext {
 		return mail;
 	}
 
-	@Bean
-	public SimpleMailMessage simpleMail() {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setSubject("Paulo Garcia");
-		message.setText("Testando o envio do email");
-		message.setTo("gpaulo42@gmail.com");
-		message.setFrom("gpaulo42@gmail.com");
-		message.setReplyTo("gpaulo42@gmail.com");
-		message.setCc("gpaulo42@gmail.com");
-		return message;
-	}
-
 }
