@@ -25,6 +25,8 @@ public interface AlunoService {
 	 */
 	List<Aluno> buscarTodos(Predicate condicao) throws NotFoundException;
 
+	List<Aluno> buscarTodosPorMesAtual() throws NotFoundException;
+
 	/**
 	 * Método de salvar novo registro no banco de dados
 	 * 
@@ -38,7 +40,7 @@ public interface AlunoService {
 	 * 
 	 * @param id
 	 */
-	void excluir(Long id)throws Exception;
+	void excluir(Long id) throws Exception;
 
 	/**
 	 * Método de busca de registro pelo identificador
@@ -46,7 +48,7 @@ public interface AlunoService {
 	 * @param id
 	 * @return {@link Aluno}
 	 */
-	Aluno buscarRegistro(Long id)throws NotFoundException;
+	Aluno buscarRegistro(Long id) throws NotFoundException;
 
 	/**
 	 * Método de busca de registro com condicao
@@ -54,5 +56,5 @@ public interface AlunoService {
 	 * @param condicao
 	 * @return {@link Aluno}
 	 */
-	Aluno buscarRegistro(Predicate condicao)throws NotFoundException;
+	Aluno buscarRegistro(Predicate condicao) throws NotFoundException;
 }

@@ -13,14 +13,14 @@
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side"> <!-- Content Header (Page header) -->
 <section class="content-header no-margin">
-<h1 class="text-center tituloPage">Novo Aluno - Dados Pessoais</h1>
+<h1 class="text-center tituloPage">Novo aluno - dados pessoais</h1>
 </section> <!-- Main content --> <section class="content"> <!-- MAILBOX BEGIN -->
 <div class="mailbox row">
 	<div class="col-xs-12">
 		<div class="box box-solid">
 			<div class="box-body">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-12" ng-app="validationApp" ng-controller="mainController">
 
 						<c:if test="${msgType.equals('success')}">
 							<div class="alert alert-success">
@@ -45,23 +45,16 @@
 
 						<form:form action="/scai_projectV-web/aluno-cadastrar/"
 							method="POST" modelAttribute="aluno" class="form-horizontal"
-							id="form-main">
+							id="form-main" ng-submit="submitForm(userForm.$valid)" name="userForm">
+							
 							<div class="step1">
 								<div class="form-group">
 									<form:label class="col-sm-2" path="nome">Nome:</form:label>
 									<div class="col-xs-9">
-										<form:input type="text" class="form-control"
+										<form:input type="text" class="form-control" ng-model="user.name"
 											placeholder="Nome do aluno" path="nome" value="${aluno.nome}"></form:input>
 									</div>
 									<form:hidden path="id" value="${aluno.id}" />
-								</div>
-
-								<div class="form-group">
-									<form:label class="col-sm-2" path="sobrenome">Sobrenome:</form:label>
-									<div class="col-xs-9">
-										<form:input type="text" class="form-control"
-											placeholder="Sobrenome do aluno" path="sobrenome" value="${aluno.sobrenome}"></form:input>
-									</div>
 								</div>
 
 								<div class="form-group">
@@ -251,45 +244,8 @@
 	$(document).ready(function() {
 		$('#btnCadastrar').click(function() {
 			$.blockUI({
-				message: '<h1><img src="http://s13.postimg.org/80vkv0coz/image.gif" /> Processando...</h1>'
-			});
-		});
-
-		$(document).ready(function() {
-			$('#testedemo').click(function() {
-				$.blockUI({
-					message : "<h2>Testando</h2>",
-					fadeIn : 700,
-					fadeOut : 700,
-					timeout : 2000,
-					showOverlay : false,
-					centerY : false,
-					css : {
-						width : '250px',
-						top : '15%',
-						left : '',
-						right : '10px',
-						border : 'none',
-						padding : '5px',
-						backgroundColor : '#000',
-						'-webkit-border-radius' : '10px',
-						'-moz-border-radius' : '10px',
-						opacity : .6,
-						color : '#fff',
-					}
-				});
+				message: '<h1><img src="/scai_projectV-web/images/loader.gif" /> Processando...</h1>'
 			});
 		});
 	});
-	
-	$('#custommessage').click(function()
-			{
-				$.blockUI(
-				{
-					/*
-						message displayed when blocking (use null for no message)
-					*/
-					message: '<h1><img src="http://s13.postimg.org/80vkv0coz/image.gif" /> Please Wait Custom Message...</h1>'
-				});
-			});
 </script>

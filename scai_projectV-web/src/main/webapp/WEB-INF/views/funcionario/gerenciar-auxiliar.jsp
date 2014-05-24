@@ -40,7 +40,6 @@
 										<c:forEach items="${funcionarios}" var="funcionario">
 											<tr>
 												<td>${funcionario.nome }</td>
-												<td>${funcionario.sobrenome }</td>
 												<td>
 													<div class="btn-group">
 														<div class="btn-group">

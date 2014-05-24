@@ -6,9 +6,9 @@
 
 <!-- header logo: style can be found in header.less -->
 <header class="header">
-<a href="../index.html" class="logo">
+<a href="/scai_projectV-web/dashboard" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                SCAI System
+                Sistema Scai
             </a>
 	<!-- Header Navbar: style can be found in header.less -->
 	<nav class="navbar navbar-static-top" role="navigation">
@@ -22,7 +22,7 @@
 			<ul class="nav navbar-nav">
 				<!-- Messages: style can be found in dropdown.less-->
 				<li class="dropdown messages-menu"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"> <i
+					class="dropdown-toggle" data-toggle="dropdown" id="notifications"> <i
 						class="fa fa-envelope"></i> <span class="label label-success">4</span>
 				</a>
 					<ul class="dropdown-menu">
@@ -198,7 +198,7 @@
 				<!-- User Account: style can be found in dropdown.less -->
 				<li class="dropdown user user-menu"><a href="#"
 					class="dropdown-toggle" data-toggle="dropdown"> <i
-						class="glyphicon glyphicon-user"></i> <span>Jane Doe <i
+						class="glyphicon glyphicon-user"></i> <span> Paulo Garcia <i
 							class="caret"></i></span>
 				</a>
 					<ul class="dropdown-menu">
@@ -206,7 +206,7 @@
 						<li class="user-header bg-light-blue"><img
 							src="../img/avatar3.png" class="img-circle" alt="User Image" />
 							<p>
-								Jane Doe - Web Developer <small>Member since Nov. 2012</small>
+								Paulo Garcia - Web Developer <small>Member since Nov. 2012</small>
 							</p></li>
 						<!-- Menu Body -->
 						<li class="user-body">

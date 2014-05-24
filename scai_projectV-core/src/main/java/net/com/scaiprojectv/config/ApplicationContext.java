@@ -20,6 +20,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.jolbox.bonecp.BoneCPDataSource;
 
@@ -35,8 +36,9 @@ import com.jolbox.bonecp.BoneCPDataSource;
  *          Developed by Paulo Garcia
  */
 @Configuration
+@EnableScheduling
 @ComponentScan(basePackages = { "net.com.scaiprojectv.service",
-		"net.com.scaiprojectv.repository.impl", "net.com.scaiprojectv.dto" })
+		"net.com.scaiprojectv.repository.impl", "net.com.scaiprojectv.dto","net.com.scaiprojectv.thread" })
 @ImportResource("classpath:applicationcontext.xml")
 @PropertySource("classpath:application.properties")
 public class ApplicationContext {

@@ -156,7 +156,7 @@
 										<div class="modal-footer">
 											<button type="button" class="btn btn-default glyphicon"
 												data-dismiss="modal">Sair</button>
-											<button type="button" class="btn btn-primary" id="add"> Salvar</button> 
+											<button type="button" class="btn btn-primary" id="add"> Adicionarr</button> 
 										</div>
 									</div>
 									<!-- /.modal-content -->

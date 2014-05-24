@@ -111,5 +111,4 @@ public class Mensalidade {
 	public Long getId() {
 		return id;
 	}
-
 }

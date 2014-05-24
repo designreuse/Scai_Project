@@ -4,6 +4,8 @@
 <%@taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
+<script type="text/javascript" src="js/jquery.mockjax.js"></script>
+
 <div class="wrapper row-offcanvas row-offcanvas-left">
 	<!-- Left side column. contains the logo and sidebar -->
 	<aside class="left-side sidebar-offcanvas">
@@ -15,16 +17,17 @@
 					<img src="../img/avatar3.png" class="img-circle" alt="User Image" />
 				</div>
 				<div class="pull-left info">
-					<p>Hello, Jane</p>
+					<p>Olá, Paulo Garcia</p>
 
 					<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 				</div>
 			</div>
 			<!-- search form -->
-			<form action="#" method="get" class="sidebar-form">
+			<form action="/scai_projectV-web/pessoa-pesquisar" method="get"
+				class="sidebar-form">
 				<div class="input-group">
-					<input type="text" name="q" class="form-control"
-						placeholder="Search..." /> <span class="input-group-btn">
+					<input type="text" name="query" id="query" class="form-control"
+						placeholder="Procurar pessoa..." /> <span class="input-group-btn">
 						<button type='submit' name='seach' id='search-btn'
 							class="btn btn-flat">
 							<i class="fa fa-search"></i>
@@ -35,11 +38,11 @@
 			<!-- /.search form -->
 			<!-- sidebar menu: : style can be found in sidebar.less -->
 			<ul class="sidebar-menu">
-				<li class="active"><a href="/scai_projectV-web/dashboard"> <i
-						class="fa fa-dashboard"></i> <span>Dashboard</span>
+				<li class="active"><a href="/scai_projectV-web/dashboard">
+						<i class="glyphicon glyphicon-home"></i> <span>Dashboard</span>
 				</a></li>
 				<li class="treeview"><a href="#"> <i
-						class="fa fa-bar-chart-o"></i> <span>Aluno</span> <i
+						class="glyphicon glyphicon-user"></i> <span>Aluno</span> <i
 						class="fa fa-angle-left pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
@@ -48,8 +51,9 @@
 						<li><a href="charts/flot.html"><i
 								class="fa fa-angle-double-right"></i> Gerenciar</a></li>
 					</ul></li>
-				<li class="treeview"><a href="#"> <i class="fa fa-laptop"></i>
-						<span>Colaborador</span> <i class="fa fa-angle-left pull-right"></i>
+				<li class="treeview"><a href="#"> <i
+						class="glyphicon glyphicon-user"></i> <span>Colaborador</span> <i
+						class="fa fa-angle-left pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
 						<li><a href="/scai_projectV-web/funcionario-novo-docente"><i
@@ -58,11 +62,13 @@
 								class="fa fa-angle-double-right"></i> Novo auxiliar</a></li>
 						<li><a href="UI/buttons.html"><i
 								class="fa fa-angle-double-right"></i> Gerenciar docente</a></li>
-						<li><a href="/scai_projectV-web/funcionario-gerenciar-auxiliar"><i
+						<li><a
+							href="/scai_projectV-web/funcionario-gerenciar-auxiliar"><i
 								class="fa fa-angle-double-right"></i> Gerenciar auxiliar</a></li>
 					</ul></li>
-				<li class="treeview"><a href="#"> <i class="fa fa-edit"></i>
-						<span>Materia</span> <i class="fa fa-angle-left pull-right"></i>
+				<li class="treeview"><a href="#"> <i
+						class="glyphicon glyphicon-book"></i> <span>Materia</span> <i
+						class="fa fa-angle-left pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
 						<li><a href="/scai_projectV-web/materia-novo"><i
@@ -70,8 +76,9 @@
 						<li><a href="/scai_projectV-web/materia-gerenciar"><i
 								class="fa fa-angle-double-right"></i> Gerenciar matéria</a></li>
 					</ul></li>
-				<li class="treeview"><a href="#"> <i class="fa fa-table"></i>
-						<span>Turma</span> <i class="fa fa-angle-left pull-right"></i>
+				<li class="treeview"><a href="#"> <i
+						class="glyphicon glyphicon-th-large"></i> <span>Turma</span> <i
+						class="fa fa-angle-left pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
 						<li><a href="/scai_projectV-web/turma-novo"><i
@@ -108,3 +115,16 @@
 		</section>
 		<!-- /.sidebar -->
 	</aside>
+
+	<script>
+		$(document).ready(function() {
+			var options, a;
+			jQuery(function() {
+				options = {
+					serviceUrl : '/scai_projectV-web/dashboard-find'
+				};
+				a = $('#query').autocomplete(options);
+			});
+
+		});
+	</script>

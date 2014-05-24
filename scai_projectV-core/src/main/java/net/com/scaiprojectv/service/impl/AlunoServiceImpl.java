@@ -1,24 +1,22 @@
 package net.com.scaiprojectv.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
-
-import com.mysema.query.types.Predicate;
 
 import javassist.NotFoundException;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import net.com.scaiprojectv.enumerator.TipoPagamentoEnum;
 import net.com.scaiprojectv.model.Aluno;
-import net.com.scaiprojectv.model.Matricula;
 import net.com.scaiprojectv.predicate.AlunoPredicate;
 import net.com.scaiprojectv.repository.AlunoRepository;
 import net.com.scaiprojectv.service.AlunoService;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.mysema.query.types.Predicate;
 
 @Service
 public class AlunoServiceImpl implements AlunoService {
@@ -36,6 +34,16 @@ public class AlunoServiceImpl implements AlunoService {
 		return (List<Aluno>) repository.findAll(condicao);
 	}
 
+	@Transactional(readOnly = true)
+	public List<Aluno> buscarTodosPorMesAtual() throws NotFoundException {
+		Calendar dataInicioMes = Calendar.getInstance();
+		Calendar dataAtual = Calendar.getInstance();
+		dataInicioMes.set(Calendar.DAY_OF_MONTH, 1);
+
+		return (List<Aluno>) repository.findAll(AlunoPredicate
+				.buscarAlunosCadastradoMesAtual(dataInicioMes, dataAtual));
+	}
+
 	@Transactional
 	public Aluno salvar(Aluno aluno) throws Exception {
 		Aluno retorno = buscarRegistro(AlunoPredicate.buscarCPF(aluno));
@@ -46,7 +54,7 @@ public class AlunoServiceImpl implements AlunoService {
 		}
 
 		if (aluno.getPagamento().getTipoPagamento()
-				.equals(TipoPagamentoEnum.A_VISTA)){
+				.equals(TipoPagamentoEnum.A_VISTA)) {
 			aluno.getPagamento().setQuantidadeParcela(0);
 			aluno.getPagamento().setDiaVencimento(0);
 		}

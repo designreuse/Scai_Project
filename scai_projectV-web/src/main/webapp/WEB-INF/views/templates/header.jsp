@@ -14,23 +14,44 @@
 	name='viewport'>
 <!-- bootstrap 3.0.2 -->
 <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet" type="text/css" />
+
 <!-- font Awesome -->
 <link href="<c:url value="/css/font-awesome.min.css" />" rel="stylesheet" type="text/css" />
+
 <!-- Ionicons -->
 <link href="<c:url value="/css/ionicons.min.css" />" rel="stylesheet" type="text/css" />
+
 <!-- Theme style -->
 <link href="<c:url value="/css/AdminLTE.css" />" rel="stylesheet" type="text/css" />
+
 <!-- jQuery 2.0.2 -->
 <script
 	src="<c:url value="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js" />"></script>
+	
 <!-- Bootstrap -->
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
 
 <!-- AdminLTE App -->
 <script src="<c:url value="/js/AdminLTE/app.js"/>"></script>
+
 <!-- DatePicker Bootstrap -->
 <script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 <link href="<c:url value="/css/datepicker.css" />" rel="stylesheet" type="text/css" />
+
 <!-- Jquery Mask -->
 <script src="<c:url value="/js/jquery.mask.js"/>"></script>
 <script src="<c:url value="/js/mask.js"/>"></script>
+
+<!-- AUTOCOMPLETE -->
+<script type="text/javascript" src="<c:url value="/js/jquery.autocomplete.js"/>"></script>
+<link href="<c:url value="/css/teste.css" />" rel="stylesheet" type="text/css" />
+
+<!-- UI Notificações IMPORTANTE *** Deve colocar o notify andes do websocket-->
+<script type="text/javascript" src="<c:url value="/js/notify.js"/>"></script>
+
+<!-- WEBSOCKET de Notificações -->
+<script type="text/javascript" src="<c:url value="/js/sockjs-0.3.4.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/stomp.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/js/websocket/notifications_websocket.js"/>"></script>
+
+

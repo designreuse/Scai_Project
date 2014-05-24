@@ -22,12 +22,16 @@ public class PessoaPredicate {
 
 	public static Predicate buscarPorNome(String nome) {
 		QPessoa condicao = QPessoa.pessoa;
-		return condicao.nome.eq(nome);
+		return condicao.nome.eq("%" + nome);
 	}
 
-	public static Predicate buscarPorId(Long id){
+	public static Predicate buscarPorId(Long id) {
 		QPessoa condicao = QPessoa.pessoa;
 		return null;
 	}
-	
+
+	public static Predicate todosCadastrado(String like) {
+		QPessoa predicate = QPessoa.pessoa;
+		return predicate.nome.lower().like(like + "%");
+	}
 }

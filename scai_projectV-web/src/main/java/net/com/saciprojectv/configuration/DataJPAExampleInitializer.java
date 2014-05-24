@@ -31,6 +31,8 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 public class DataJPAExampleInitializer implements WebApplicationInitializer {
 
+	final AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -41,11 +43,12 @@ public class DataJPAExampleInitializer implements WebApplicationInitializer {
 	@Override
 	public void onStartup(ServletContext arg0) throws ServletException {
 		// Loading application context
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.register(ApplicationContext.class);
+//		rootContext.scan("net.com.scaiprojectv.controller");
 		// Dispatcher servlet
 		ServletRegistration.Dynamic dispatcher = arg0.addServlet("dispatcher",
 				new DispatcherServlet(rootContext));
+		dispatcher.setAsyncSupported(true);
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
 		// Context loader listener

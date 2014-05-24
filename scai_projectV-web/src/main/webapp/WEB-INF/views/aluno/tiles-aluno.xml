@@ -13,4 +13,14 @@
 		<put-attribute name="title" value="SCAI - Teste"/>
 		<put-attribute name="body" value="/WEB-INF/views/aluno/novo-aluno.jsp"></put-attribute>		
 	</definition>
+	
+	<definition name="editar-aluno" extends="base.definition">
+		<put-attribute name="title" value="SCAI - Teste"/>
+		<put-attribute name="body" value="/WEB-INF/views/aluno/editar-aluno.jsp"></put-attribute>		
+	</definition>
+	
+	<definition name="mensalidade-aluno" extends="base.definition">
+		<put-attribute name="title" value="SCAI - Mensalidades"/>
+		<put-attribute name="body" value="/WEB-INF/views/aluno/mensalidades.jsp"></put-attribute>		
+	</definition>
 </tiles-definitions>

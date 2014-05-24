@@ -5,13 +5,7 @@ package net.com.saciprojectv.configuration;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.JsonEncoding;
@@ -20,13 +14,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -50,9 +44,11 @@ import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
  */
 @Configuration
 @EnableWebMvc
+@EnableScheduling
 @ComponentScan(basePackages = { "net.com.scaiprojectv.controller" })
 @EnableJpaRepositories(value = { "net.com.scaiprojectv.repository.impl" })
-@Import(value = net.com.scaiprojectv.config.ApplicationContext.class)
+@Import(value = { net.com.scaiprojectv.config.ApplicationContext.class,
+		WebSocketConfiguration.class })
 public class ApplicationContext extends WebMvcConfigurerAdapter {
 
 	private static final String DEFINICAO_TILES_PADRAO_GLOBAL = "/WEB-INF/web-tiles.xml";
@@ -62,6 +58,12 @@ public class ApplicationContext extends WebMvcConfigurerAdapter {
 
 	private static final Logger logger = Logger
 			.getLogger(ApplicationContext.class);
+
+	@Override
+	public void configureDefaultServletHandling(
+			final DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
